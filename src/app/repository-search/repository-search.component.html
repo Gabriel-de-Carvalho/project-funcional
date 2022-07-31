@@ -1,0 +1,18 @@
+<p>repository-search works!</p>
+
+<input (keyup)="onKeyInput($event)">
+<button (click)="showJavaRepository()"> teste</button>
+
+<p>Escolha a modalidade de busca</p>
+	<select [(ngModel)]="modality">
+		<option default value="repositories">Repositorio</option>
+		<option value="commits">commits</option>
+		<option value="code">code</option>
+		<option value="issues">issues</option>
+        <option value="pull-request">pull request</option>
+        <option value="labels">labels</option>
+        <option value="topics">topics</option>
+        <option value="users">user</option>
+
+
+	</select>
