@@ -5,27 +5,31 @@ import { subscribeOn } from 'rxjs';
 @Component({
   selector: 'app-repository-search',
   templateUrl: './repository-search.component.html',
-  styleUrls: ['./repository-search.component.css']
+  styleUrls: ['./repository-search.component.css'],
 })
+
 export class RepositorySearchComponent implements OnInit {
+  searchString = '';
+  modality = '';
 
-  searchString = "";
-   modality = "";
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient ) { 
-
-  }
-
-  onKeyInput(event: KeyboardEvent){
+  onKeyInput(event: KeyboardEvent) {
     this.searchString = (event.target as HTMLInputElement).value;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  showJavaRepository(){
-    console.log("teste")
-    this.http.get("https://api.github.com/search/"+ this.modality +"?q="+ this.searchString +"").subscribe(resultado => console.log(resultado))
+  showJavaRepository() {
+    console.log('teste');
+    this.http
+      .get(
+        'https://api.github.com/search/' +
+          this.modality +
+          '?q=' +
+          this.searchString +
+          ''
+      )
+      .subscribe((resultado) => console.log(resultado));
   }
-
 }
