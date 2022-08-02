@@ -7,7 +7,6 @@ import { subscribeOn } from 'rxjs';
   templateUrl: './repository-search.component.html',
   styleUrls: ['./repository-search.component.css'],
 })
-
 export class RepositorySearchComponent implements OnInit {
   searchString = '';
   modality = '';
@@ -30,6 +29,9 @@ export class RepositorySearchComponent implements OnInit {
           this.searchString +
           ''
       )
-      .subscribe((resultado) => console.log(resultado));
+      .subscribe(
+        (resultado) => console.log(resultado),
+        (err) => console.log(err.message)
+      );
   }
 }
