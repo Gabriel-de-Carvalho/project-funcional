@@ -22,7 +22,7 @@
   justify-content: center;
   text-align: center;
   flex-direction: column;
-  height: 50vh;
+  height: 40vh;
   padding: auto;
 }
 
@@ -41,4 +41,13 @@ button:hover {
 
 h3 {
   color: #fff;
+}
+
+.section {
+  margin: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
