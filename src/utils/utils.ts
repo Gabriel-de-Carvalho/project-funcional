@@ -30,3 +30,13 @@ export const groupBy = (key: any, collection: any[]) => {
     
     return result;
   };
+
+export const orderBy = (key: any, collection: any[]) => {
+    const collectionCopy = [...collection];
+  
+    const result = collectionCopy.sort((a, b) => {
+      return a[key] < b[key] ? -1 : 1;
+    });
+  
+    return result;
+  };
