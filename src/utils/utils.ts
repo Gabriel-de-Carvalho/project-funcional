@@ -12,9 +12,8 @@ export const distinct =  (arr: any[]) => {
 
 
 export const groupBy = (key: any, collection: any[]) => {
-  console.log("oi")
     const collectionCopy = [...collection];
-    console.log("oi")
+    
     const result = collectionCopy.reduce((resultObj, currItem) => {
       const group = currItem[key];
       
@@ -30,3 +29,4 @@ export const groupBy = (key: any, collection: any[]) => {
     
     return result;
   };
+
