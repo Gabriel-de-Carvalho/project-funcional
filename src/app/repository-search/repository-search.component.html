@@ -6,6 +6,8 @@
   <div class="section">
     <label>String de busca</label>
     <input class="select" (keyup)="onKeyInput($event)" />
+    <label *ngIf="modality == 'labels'">ID do repositorio</label>
+    <input class="select" *ngIf="modality == 'labels'"/>
   </div>
   <div class="section">
     <label>Escolha a modalidade de busca</label>
@@ -21,4 +23,17 @@
     </select>
   </div>
   <button (click)="showJavaRepository()">teste</button>
+
+  <div>
+    <ul>
+      <li *ngFor="let groups of items">
+        <div *ngFor="let item of groups">
+          <app-card-info [info]="item"></app-card-info>
+        </div>
+        
+
+      </li>
+    </ul>
+
+  </div>
 </div>

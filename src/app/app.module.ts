@@ -6,19 +6,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RepositorySearchComponent } from './repository-search/repository-search.component';
 import { FormsModule } from '@angular/forms';
+import { CardInfoComponent } from './card-info/card-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RepositorySearchComponent
+    RepositorySearchComponent,
+    CardInfoComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
+  providers: [CardInfoComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

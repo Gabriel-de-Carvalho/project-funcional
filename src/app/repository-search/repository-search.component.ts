@@ -14,6 +14,7 @@ import { compose, distinct, groupBy } from 'src/utils/utils';
 export class RepositorySearchComponent implements OnInit {
   searchString = '';
   modality = '';
+  items: any[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -35,7 +36,8 @@ export class RepositorySearchComponent implements OnInit {
       )
       .subscribe(
         (resultado) =>
-        console.log(groupBy(resultado.items, this.modality)
-      ));
+        this.items = Object.entries(groupBy(resultado.items, this.modality)),
+
+      );
   }
 }
