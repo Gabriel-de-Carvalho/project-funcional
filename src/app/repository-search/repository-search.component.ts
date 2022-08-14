@@ -36,7 +36,7 @@ export class RepositorySearchComponent implements OnInit {
       )
       .subscribe(
         (resultado) =>
-        this.items = Object.entries(groupBy(resultado.items, this.modality)),
+        this.items = Object.values(groupBy(resultado.items, this.modality)),
 
       );
   }
