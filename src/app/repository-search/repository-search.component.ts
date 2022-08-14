@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
+import { groupBy, distinct } from '../../utils/utils';
+import { searchItems } from 'src/interface/resultado';
 
 @Component({
   selector: 'app-repository-search',
@@ -21,17 +23,16 @@ export class RepositorySearchComponent implements OnInit {
 
   showJavaRepository() {
     console.log('teste');
+    console.log("oi")
     this.http
-      .get(
+      .get<searchItems>(
         'https://api.github.com/search/' +
           this.modality +
           '?q=' +
-          this.searchString +
-          ''
+          this.searchString
       )
       .subscribe(
-        (resultado) => console.log(resultado),
-        (err) => console.log(err.message)
+        (resultado) => console.log(groupBy(resultado.items, this.modality))
       );
   }
 }
