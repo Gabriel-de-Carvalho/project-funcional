@@ -14,17 +14,29 @@ import { compose, distinct, groupBy } from 'src/utils/utils';
 export class RepositorySearchComponent implements OnInit {
   searchString = '';
   modality = '';
+  repositoryId = '';
   items: any[] = [];
 
   constructor(private http: HttpClient) {}
 
-  onKeyInput(event: KeyboardEvent) {
+  onInputSearchString(event: KeyboardEvent) {
     this.searchString = (event.target as HTMLInputElement).value;
   }
 
+  onInputRepositoryId(event: KeyboardEvent) {
+    this.repositoryId = (event.target as HTMLInputElement).value;
+  }
+
+
   ngOnInit(): void {}
 
-  showJavaRepository() {
+
+ disableButton(){
+  return this.modality == 'labels' ? (this.repositoryId == "" ? true : false) : false
+ }
+
+
+  getCollectionsGitHubApi() {
     console.log('teste');
     console.log("oi")
     this.http
@@ -32,7 +44,9 @@ export class RepositorySearchComponent implements OnInit {
         'https://api.github.com/search/' +
           this.modality +
           '?q=' +
-          this.searchString
+          this.searchString + 
+          (this.modality == "labels" ? "&repository_id=" + this.repositoryId : "")
+          
       )
       .subscribe(
         (resultado) =>

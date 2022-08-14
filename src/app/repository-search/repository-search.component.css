@@ -17,11 +17,11 @@
 }
 
 .container {
-  display: flex;
+
   align-items: center;
   justify-content: center;
   text-align: center;
-  flex-direction: column;
+
   height: 40vh;
   padding: auto;
 }
@@ -50,4 +50,16 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.cards{
+  list-style: none;
+  display: inline;
+}
+
+.card{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
 }

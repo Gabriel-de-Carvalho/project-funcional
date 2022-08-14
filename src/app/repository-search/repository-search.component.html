@@ -5,9 +5,9 @@
 <div ngClass="container">
   <div class="section">
     <label>String de busca</label>
-    <input class="select" (keyup)="onKeyInput($event)" />
+    <input class="select" (keyup)="onInputSearchString($event)" />
     <label *ngIf="modality == 'labels'">ID do repositorio</label>
-    <input class="select" *ngIf="modality == 'labels'"/>
+    <input class="select" *ngIf="modality == 'labels'" (keyup)="onInputRepositoryId($event)"/>
   </div>
   <div class="section">
     <label>Escolha a modalidade de busca</label>
@@ -22,11 +22,11 @@
       <option value="users">user</option>
     </select>
   </div>
-  <button (click)="showJavaRepository()">teste</button>
+  <button (click)="getCollectionsGitHubApi()" [disabled]="disableButton()">teste</button>
 
   <div>
-    <ul>
-      <li *ngFor="let groups of items">
+    <ul class="cards">
+      <li *ngFor="let groups of items" class="card">
         <div *ngFor="let item of groups">
           <app-card-info [info]="item"></app-card-info>
         </div>
