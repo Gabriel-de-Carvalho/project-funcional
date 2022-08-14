@@ -1,19 +1,4 @@
-export const distinct = (collection: any[], modality: string) => {
-  switch (modality) {
-    case 'repositories':
-      return callDistinct(modality, collection);
-    case 'labels':
-      return callDistinct(modality, collection);
-    case 'issues':
-      return callDistinct(modality, collection);
-    case 'topics':
-      return callDistinct(modality, collection);
-    case 'users':
-      return callDistinct(modality, collection);
-  }
-};
-
-export const callDistinct: any[] = (modality: string, arr: any[]) => {
+export const distinct = (arr: any[], modality: string) => {
   var repeticoes: any[] = [];
   return arr.filter(function (el) {
     if (!repeticoes.includes(el[modalitysAttributes[modality]['distinct']])) {
@@ -99,7 +84,7 @@ export const compose = function (
   modalidade2: string,
   collection: any[]
 ) {
-  return f(modalidade, g(collection));
+  return f(modalidade, g(collection, modalidade2));
 };
 
 const modalitysAttributes: { [key: string]: any } = {

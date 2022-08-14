@@ -49,7 +49,15 @@ export class RepositorySearchComponent implements OnInit {
       )
       .subscribe((resultado) => {
         // (this.items = Object.values(groupBy(resultado.items, this.modality))),
-        this.items = (distinct(resultado.items, this.modality));
+        this.items = Object.values(
+          compose(
+            groupBy,
+            distinct,
+            this.modality,
+            this.modality,
+            resultado.items
+          )
+        );
         console.log(this.items);
       });
   }
