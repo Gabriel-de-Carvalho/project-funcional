@@ -1,9 +1,19 @@
 .header {
-    height: 10vh;
-    background-color: #205cab;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 14vh;
+  background-color: #24292f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  font-size: 16px;
+}
+
+.img {
+  width: 50px;
+  height: 50px;
+  margin: 0px 10px;
 }
 
 .select {
@@ -12,12 +22,11 @@
   justify-content: center;
   text-align: center;
   border-radius: 10px;
-  border: 1px solid #205cab;
+  border: 1px solid #4444;
   width: 16%;
 }
 
 .container {
-
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -28,8 +37,9 @@
 
 button {
   margin: 20px;
+  padding: 5px;
   border: none;
-  background-color: #205cab;
+  background-color: #2da44e;
   border-radius: 10px;
   font-size: 20px;
   color: #ffff;
@@ -44,7 +54,7 @@ h3 {
 }
 
 .section {
-  margin: 20px;
+  margin: 20px auto;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -52,14 +62,29 @@ h3 {
   flex-direction: column;
 }
 
-.cards{
-  list-style: none;
-  display: inline;
-}
-
-.card{
-  display:flex;
+.cards-container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 30%;
+  align-items: center;
+  margin: 20px 0px;
+  width: 100%;
+}
+
+.cards {
+  display: inline;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0px 40px;
+  align-items: center;
+  border: none;
+}
+
+.card {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  border: none;
 }

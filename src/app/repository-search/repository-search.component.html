@@ -1,37 +1,42 @@
 <div ngClass="header">
-  <h3>Repository-search works :)</h3>
+  <img src="../../assets/github.png" class="img">
+  <h3>Welcome to Search project</h3>
 </div>
 
 <div ngClass="container">
   <div class="section">
-    <label>String de busca</label>
-    <input class="select" (keyup)="onInputSearchString($event)" />
-    <label *ngIf="modality == 'labels'">ID do repositorio</label>
-    <input class="select" *ngIf="modality == 'labels'" (keyup)="onInputRepositoryId($event)"/>
+    <label  *ngIf="modality != 'labels'">Search String</label>
+    <input  *ngIf="modality != 'labels'" class="select" (keyup)="onInputSearchString($event)" />
+    <label *ngIf="modality == 'labels'">Repository Id</label>
+    <input
+      class="select"
+      *ngIf="modality == 'labels'"
+      (keyup)="onInputRepositoryId($event)"
+    />
   </div>
   <div class="section">
-    <label>Escolha a modalidade de busca</label>
+    <label>Choose the modality search</label>
     <select [(ngModel)]="modality" class="select">
       <option default value="repositories">Repositorio</option>
       <option value="commits">commits</option>
       <option value="code">code</option>
       <option value="issues">issues</option>
-      <option value="pull-request">pull request</option>
-      <option value="labels">labels</option>
+      <option value="labels">labels & pull requests</option>
       <option value="topics">topics</option>
       <option value="users">user</option>
     </select>
   </div>
-  <button (click)="getCollectionsGitHubApi()" [disabled]="disableButton()">teste</button>
+  <button (click)="getCollectionsGitHubApi()" [disabled]="disableButton()">
+    Start search
+  </button>
 
-  <div>
-    <ul class="cards">
-      <li *ngFor="let groups of items" class="card">
+  <div class="cards-container">
+    <div class="cards">
+      <div *ngFor="let groups of items" class="card">
         <div *ngFor="let item of groups">
           <app-card-info [info]="item"></app-card-info>
         </div>
-      </li>
-    </ul>
-
+      </div>
+    </div>
   </div>
 </div>

@@ -1,76 +1,86 @@
-
-export const distinct =  (arr: any[]) => {
-  
-    var repeticoes: any[] = []
-    return arr.filter(function(el, i) {
-        if( !repeticoes.includes(el["name"])){
-            repeticoes.push(el["name"])
-            return true
-        } 
-        return false
-      
-    });
-  }
-
-
-export const groupBy = (collection: any[], modality: string) => {
-
+export const distinct = (collection: any[], modality: string) => {
   switch (modality) {
     case 'repositories':
-    return groupBySecondLevel(modality, "keyObject", "attribute", collection);
+      return callDistinct(modality, collection);
+    case 'labels':
+      return callDistinct(modality, collection);
+    case 'issues':
+      return callDistinct(modality, collection);
+    case 'topics':
+      return callDistinct(modality, collection);
+    case 'users':
+      return callDistinct(modality, collection);
   }
+};
 
+export const callDistinct: any[] = (modality: string, arr: any[]) => {
+  var repeticoes: any[] = [];
+  return arr.filter(function (el) {
+    if (!repeticoes.includes(el[modalitysAttributes[modality]['distinct']])) {
+      repeticoes.push(el[modalitysAttributes[modality]['distinct']]);
+      return true;
+    }
+    return false;
+  });
+};
 
-  };
-
-
-
-
-  const groupByFirstLevel = (modality: string, collection: any[]) => {
-    const collectionCopy = [...collection];
-    
-    const result = collectionCopy.reduce((resultObj, currItem) => {
-      const group = currItem[modalitysAttributes[modality]["groupBy"]];
-      
-  
-      if (!resultObj[group]) {
-        resultObj[group] = [];
-      }
-  
-      resultObj[group].push(currItem);
-  
-      return resultObj;
-    }, {});
-    
-    return result;
+export const groupBy = (collection: any[], modality: string) => {
+  switch (modality) {
+    case 'repositories':
+      return groupBySecondLevel(modality, 'keyObject', 'attribute', collection);
+    case 'labels':
+      return groupByFirstLevel(modality, collection);
+    case 'issues':
+      return groupBySecondLevel(modality, 'keyObject', 'attribute', collection);
+    case 'topics':
+      return groupByFirstLevel(modality, collection);
+    case 'users':
+      return groupByFirstLevel(modality, collection);
   }
+};
 
+const groupByFirstLevel = (modality: string, collection: any[]) => {
+  const collectionCopy = [...collection];
 
-  const groupBySecondLevel = (modality: string, key: string, key2: string , collection: any[]) => {
-    const collectionCopy = [...collection];
+  const result = collectionCopy.reduce((resultObj, currItem) => {
+    const group = currItem[modalitysAttributes[modality]['groupBy']];
 
-    const result = collectionCopy.reduce((resultObj, currItem) => {
+    if (!resultObj[group]) {
+      resultObj[group] = [];
+    }
 
+    resultObj[group].push(currItem);
 
-      console.log(modalitysAttributes[modality]["groupBy"][key])
+    return resultObj;
+  }, {});
 
-      const internalObj = currItem[modalitysAttributes[modality]["groupBy"][key]]
+  return result;
+};
 
-      const group = internalObj[modalitysAttributes[modality]["groupBy"][key2]];
+const groupBySecondLevel = (
+  modality: string,
+  key: string,
+  key2: string,
+  collection: any[]
+) => {
+  const collectionCopy = [...collection];
 
-      if (!resultObj[group]) {
-        resultObj[group] = [];
-      }
-  
-      resultObj[group].push(currItem);
-  
-      return resultObj;
-    }, {});
-    
-    return result;
-  }
+  const result = collectionCopy.reduce((resultObj, currItem) => {
+    const internalObj = currItem[modalitysAttributes[modality]['groupBy'][key]];
 
+    const group = internalObj[modalitysAttributes[modality]['groupBy'][key2]];
 
+    if (!resultObj[group]) {
+      resultObj[group] = [];
+    }
+
+    resultObj[group].push(currItem);
+
+    return resultObj;
+  }, {});
+
+  return result;
+};
 
 export const orderBy = (key: any, collection: any[]) => {
   const collectionCopy = [...collection];
@@ -92,30 +102,28 @@ export const compose = function (
   return f(modalidade, g(collection));
 };
 
-
-const modalitysAttributes : {[key: string]: any} = {
+const modalitysAttributes: { [key: string]: any } = {
   repositories: {
-    groupBy: {keyObject: "owner", attribute: "login"},
-    orderBy: "size",
-    distinct: "Author"
+    groupBy: { keyObject: 'owner', attribute: 'login' },
+    orderBy: 'size',
+    distinct: 'Author',
   },
   topics: {
-    groupBy: "featured",
+    groupBy: 'featured',
 
-    distinct: "display_name"
+    distinct: 'display_name',
   },
-  users:{
-
+  users: {
+    groupBy: 'type',
   },
-  labels:{
-    groupBy: "name",
-    orderBy: "name",
-    distinct: ""
+  labels: {
+    groupBy: 'name',
+    orderBy: 'name',
+    distinct: 'id',
   },
   issues: {
-    distinct: "repository_url",
-    groupBy: {keyObject: "user", attribute: "login"},
-    orderBy: "title"
-  }
-
-}
+    distinct: 'repository_url',
+    groupBy: { keyObject: 'user', attribute: 'id' },
+    orderBy: 'title',
+  },
+};
