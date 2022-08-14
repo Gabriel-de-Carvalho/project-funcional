@@ -1,3 +1,5 @@
+
+
 export const distinct = (arr: any[], modality: string) => {
   var repeticoes: any[] = [];
   return arr.filter(function (el) {
@@ -67,11 +69,12 @@ const groupBySecondLevel = (
   return result;
 };
 
-export const orderBy = (key: any, collection: any[]) => {
+export const orderBy = (collection: any[], modality: string) => {
+  console.log(collection)
   const collectionCopy = [...collection];
 
   const result = collectionCopy.sort((a, b) => {
-    return a[key] < b[key] ? -1 : 1;
+    return a[modalitysAttributes[modality]["orderBy"]] < b[modalitysAttributes[modality]["orderBy"]] ? -1 : 1;
   });
 
   return result;
@@ -84,7 +87,9 @@ export const compose = function (
   modalidade2: string,
   collection: any[]
 ) {
-  return f(modalidade, g(collection, modalidade2));
+  console.log(g(collection, modalidade2))
+  console.log(f( g(collection, modalidade2), modalidade))
+  return f( g(collection, modalidade2), modalidade);
 };
 
 const modalitysAttributes: { [key: string]: any } = {

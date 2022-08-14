@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
 
 import { searchItems } from 'src/interface/resultado';
-import { compose, distinct, groupBy } from 'src/utils/utils';
+import { compose, distinct, groupBy, orderBy } from 'src/utils/utils';
 
 @Component({
   selector: 'app-repository-search',
@@ -52,13 +52,13 @@ export class RepositorySearchComponent implements OnInit {
         this.items = Object.values(
           compose(
             groupBy,
-            distinct,
+            orderBy,
             this.modality,
             this.modality,
             resultado.items
           )
         );
-        console.log(this.items);
+        console.log(resultado.items);
       });
   }
 }
