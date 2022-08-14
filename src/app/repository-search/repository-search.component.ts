@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { subscribeOn } from 'rxjs';
-import { groupBy, distinct } from '../../utils/utils';
+
 import { searchItems } from 'src/interface/resultado';
+import { compose, distinct, groupBy } from 'src/utils/utils';
+
 
 @Component({
   selector: 'app-repository-search',
@@ -32,7 +34,8 @@ export class RepositorySearchComponent implements OnInit {
           this.searchString
       )
       .subscribe(
-        (resultado) => console.log(groupBy(resultado.items, this.modality))
-      );
+        (resultado) =>
+        console.log(groupBy(resultado.items, this.modality)
+      ));
   }
 }
