@@ -89,6 +89,7 @@ export const compose = function (
 ) {
   console.log(g(collection, modalidade2))
   console.log(f( g(collection, modalidade2), modalidade))
+
   return f( g(collection, modalidade2), modalidade);
 };
 

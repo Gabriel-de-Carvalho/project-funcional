@@ -5,9 +5,17 @@
 
 <div ngClass="container">
   <div class="section">
-    <label  *ngIf="modality != 'labels'">Search String</label>
-    <input  *ngIf="modality != 'labels'" class="select" (keyup)="onInputSearchString($event)" />
+    <label>Search String</label>
+    <input class="select" (keyup)="onInputSearchString($event)" />
+  </div>
+  <div class="section">
     <label *ngIf="modality == 'labels'">Repository Id</label>
+    <label *ngIf="modality == 'code'">Username</label>
+    <input
+      class="select"
+      *ngIf="modality == 'code'"
+      (keyup)="onInputUserLogin($event)"
+    />
     <input
       class="select"
       *ngIf="modality == 'labels'"
