@@ -4,7 +4,7 @@
 </div>
 
 <div ngClass="container">
-  <div class="section">
+  <div *ngIf="modality !== 'labels'" class="section">
     <label>Search String</label>
     <input class="select" (keyup)="onInputSearchString($event)" />
   </div>

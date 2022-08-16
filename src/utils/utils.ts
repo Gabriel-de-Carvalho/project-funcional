@@ -1,5 +1,3 @@
-
-
 export const distinct = (arr: any[], modality: string) => {
   var repeticoes: any[] = [];
   return arr.filter(function (el) {
@@ -22,6 +20,8 @@ export const groupBy = (collection: any[], modality: string) => {
     case 'topics':
       return groupByFirstLevel(modality, collection);
     case 'users':
+      return groupByFirstLevel(modality, collection);
+    case 'code':
       return groupByFirstLevel(modality, collection);
   }
 };
@@ -70,11 +70,14 @@ const groupBySecondLevel = (
 };
 
 export const orderBy = (collection: any[], modality: string) => {
-  console.log(collection)
+  console.log(collection);
   const collectionCopy = [...collection];
 
   const result = collectionCopy.sort((a, b) => {
-    return a[modalitysAttributes[modality]["orderBy"]] < b[modalitysAttributes[modality]["orderBy"]] ? -1 : 1;
+    return a[modalitysAttributes[modality]['orderBy']] <
+      b[modalitysAttributes[modality]['orderBy']]
+      ? -1
+      : 1;
   });
 
   return result;
@@ -87,10 +90,10 @@ export const compose = function (
   modalidade2: string,
   collection: any[]
 ) {
-  console.log(g(collection, modalidade2))
-  console.log(f( g(collection, modalidade2), modalidade))
+  console.log(g(collection, modalidade2));
+  console.log(f(g(collection, modalidade2), modalidade));
 
-  return f( g(collection, modalidade2), modalidade);
+  return f(g(collection, modalidade2), modalidade);
 };
 
 const modalitysAttributes: { [key: string]: any } = {
@@ -116,5 +119,15 @@ const modalitysAttributes: { [key: string]: any } = {
     distinct: 'repository_url',
     groupBy: { keyObject: 'user', attribute: 'id' },
     orderBy: 'title',
+  },
+  code: {
+    groupBy: '',
+    orderBy: 'name',
+    distinct: 'id',
+  },
+  commits: {
+    groupBy: '',
+    orderBy: 'name',
+    distinct: 'id',
   },
 };
