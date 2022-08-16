@@ -22,9 +22,11 @@ export const groupBy = (collection: any[], modality: string) => {
     case 'users':
       return groupByFirstLevel(modality, collection);
     case 'code':
-      return groupByFirstLevel(modality, collection);
-  }
-};
+      return groupBySecondLevel(modality, 'keyObject', 'attribute', collection);
+      case 'commits':
+        return groupBySecondLevel(modality, 'keyObject', 'attribute', collection);
+    }
+  };
 
 const groupByFirstLevel = (modality: string, collection: any[]) => {
   const collectionCopy = [...collection];
@@ -54,14 +56,16 @@ const groupBySecondLevel = (
 
   const result = collectionCopy.reduce((resultObj, currItem) => {
     const internalObj = currItem[modalitysAttributes[modality]['groupBy'][key]];
+    if (internalObj != null){
+      const group = internalObj[modalitysAttributes[modality]['groupBy'][key2]];
 
-    const group = internalObj[modalitysAttributes[modality]['groupBy'][key2]];
-
-    if (!resultObj[group]) {
-      resultObj[group] = [];
+      if (!resultObj[group]) {
+        resultObj[group] = [];
+      }
+  
+      resultObj[group].push(currItem);
     }
 
-    resultObj[group].push(currItem);
 
     return resultObj;
   }, {});
@@ -70,7 +74,7 @@ const groupBySecondLevel = (
 };
 
 export const orderBy = (collection: any[], modality: string) => {
-  console.log(collection);
+ 
   const collectionCopy = [...collection];
 
   const result = collectionCopy.sort((a, b) => {
@@ -87,13 +91,11 @@ export const compose = function (
   f: any,
   g: any,
   modalidade: string,
-  modalidade2: string,
   collection: any[]
 ) {
-  console.log(g(collection, modalidade2));
-  console.log(f(g(collection, modalidade2), modalidade));
 
-  return f(g(collection, modalidade2), modalidade);
+
+  return f(g(collection, modalidade), modalidade);
 };
 
 const modalitysAttributes: { [key: string]: any } = {
@@ -108,7 +110,7 @@ const modalitysAttributes: { [key: string]: any } = {
     distinct: 'display_name',
   },
   users: {
-    groupBy: 'type',
+    groupBy: 'type'
   },
   labels: {
     groupBy: 'name',
@@ -121,12 +123,12 @@ const modalitysAttributes: { [key: string]: any } = {
     orderBy: 'title',
   },
   code: {
-    groupBy: '',
+    groupBy: { keyObject: 'repository', attribute: 'name' },
     orderBy: 'name',
     distinct: 'id',
   },
   commits: {
-    groupBy: '',
+    groupBy: { keyObject: 'author', attribute: 'login' },
     orderBy: 'name',
     distinct: 'id',
   },

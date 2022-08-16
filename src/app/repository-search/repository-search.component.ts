@@ -54,7 +54,7 @@ export class RepositorySearchComponent implements OnInit {
           '?q=' +
           this.searchString +
           (this.modality == 'labels'
-            ? 'a&repository_id=' + this.repositoryId
+            ? '&repository_id=' + this.repositoryId
             : '') +
           (this.modality == 'code'
             ? '+user%3A' + this.userLogin
@@ -67,11 +67,10 @@ export class RepositorySearchComponent implements OnInit {
                   groupBy,
                   orderBy,
                   this.modality,
-                  this.modality,
                   resultado.items
                 )
         );
-        console.log(resultado.items);
+      
       });
   }
 }
